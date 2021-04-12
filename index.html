@@ -1,9 +1,27 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <title>
+      Home
+    </title>
   </head>
   <body>
     <div>
       <span>Greetings user</span>
     </div>
+    <script>
+        var request = new XMLHttpRequest();
+        request.open("GET", "/config.xml", false);
+        request.send();
+        var xml = request.responseXML;
+        var clientid = xml.getElementsByTagName("client");
+        var clientsecret = xml.getElementsByTagName("clientauth");
+        const Splitwise = require('splitwise')
+        const sw = Splitwise({
+            consumerKey: clientid,
+            consumerSecret: clientsecret
+        })
+        sw.getCurrentUser().then(console.log)
+    </script>
   </body>
-<html>
+</html>
